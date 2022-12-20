@@ -1,5 +1,12 @@
 const User = require('./userModel') 
 
+//POST
+//http://localhost:5001/createUsers
+// {
+//     "username" : "test1",
+//     "email" :"test1@email.com",
+//     "password" : 'password123'
+// }
 exports.createUser = async (req, res) => { 
     console.log(req.body)
     try {
@@ -12,6 +19,8 @@ exports.createUser = async (req, res) => {
     }
 }
 
+//GET
+//http://localhost:5001/readUsers
 exports.readUsers = async (req, res) => {
     try {
         const users = await User.find({})
@@ -21,6 +30,14 @@ exports.readUsers = async (req, res) => {
         res.status(500).send({error: error.message})
     }
 }
+
+//PUT
+//http://localhost:5001/updateUser
+//  {
+//     "usernmae" : "test1",
+//     "key" : "username",
+//     "value": "newTest1"
+//  }
 exports.updateUser = async (req, res) => {
     try {
         await User.updateOne(
@@ -35,7 +52,11 @@ exports.updateUser = async (req, res) => {
         res.status(500).send({error: error.message})
     }
 }
-
+//DELETE
+//http://localhost:5001/deleteUser
+// {
+//     "username" : "test1"
+// }
 exports.deleteUser = async (req, res) => {
     try {
         await User.deleteOne({username: req.body.username})
@@ -46,6 +67,12 @@ exports.deleteUser = async (req, res) => {
     }
 }
 
+//POST
+//http://localhost:5001/login 
+// {
+//     "username" : "test1",
+//     "password": "password123"
+// }
 exports.loginUser = async (req, res) => {
     console.log("middleware passed and controller has been called")
     try {
@@ -57,9 +84,3 @@ exports.loginUser = async (req, res) => {
         res.status(500).send({error: error.message})
     }
 }
-
-
-
-
-
-//TODO 2 controllers here one for update, one for delete
