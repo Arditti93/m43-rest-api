@@ -1,4 +1,5 @@
 const User = require('./userModel') 
+const jwt = require("jsonwebtoken")
 
 //POST
 //http://localhost:5001/createUsers
@@ -77,7 +78,9 @@ exports.loginUser = async (req, res) => {
     console.log("middleware passed and controller has been called")
     try {
         const user = await User.findOne({username: req.body.username})
-        res.status(200).send({username: user.username })
+        const token = await jwt.sign({_id: user._id }, process.env.SECRET)
+        console.log(token)
+        res.status(200).send({username: user.username, token })
     } catch (error) {
         console.log(error)
         console.log("username not found")

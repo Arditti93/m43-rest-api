@@ -1,7 +1,7 @@
 const { Router } = require("express")
-//import delete and update here
+//import controllers and middleware so we can call them in our endpoints defined below
 const {createUser, readUsers, updateUser, deleteUser, loginUser} = require("./userControllers")
-const { hashPass, comparePass } = require("../middleware")
+const { hashPass, comparePass, tokenCheck } = require("../middleware")
 
 const userRouter = Router()
 
@@ -10,15 +10,11 @@ const userRouter = Router()
 //PUT/PATCH - The PUT and PATCH methods handle update requests, for instance updating data in a database.
 //DELETE - Fairly self-explanatory, data should be deleted on a DELETE method.
 
-
+//dedfine our endpoints and set which http verb the endpoint is expecting when it recives at request
 userRouter.post("/createUser",hashPass, createUser)
 userRouter.post("/login", comparePass, loginUser)
-userRouter.get("/readUsers", readUsers)
+userRouter.get("/readUsers", tokenCheck, readUsers) // protected endpoint
 userRouter.put("/updateUser", updateUser)
 userRouter.delete("/deleteUser", deleteUser)
-
-//TODO: 2 more endpoints here 
-//update .put 
-//delete .delete
 
 module.exports = userRouter
