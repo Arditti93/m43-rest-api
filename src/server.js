@@ -8,10 +8,15 @@
 //PASSWORD HASHING LIBARY
 // npm i bcrypt 
 
+//LIBARY FOR GENERATING JWT TOKENS
+//npm i jsonwebtoken
+
 //SEVER START COMMAND
 //node src/server.js
 
-//before anything run and try to connect to our MongoDB clusters
+// ---------------------- \\
+
+//before we do anything run and try to connect to our MongoDB clusters
 require('./db/connection');
 
 const express = require('express')
