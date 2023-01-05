@@ -12,9 +12,14 @@ const userRouter = Router()
 
 //dedfine our endpoints and set which http verb the endpoint is expecting when it recives at request
 userRouter.post("/createUser",hashPass, createUser)
+
 userRouter.post("/login", comparePass, loginUser)
-userRouter.get("/readUsers", tokenCheck, readUsers) // protected endpoint
+
+//removed token check for the moment
+userRouter.get("/readUsers",readUsers) // protected endpoint
+userRouter.get("/authCheck", tokenCheck, loginUser) // endpoint for persistant login
 userRouter.put("/updateUser", updateUser)
 userRouter.delete("/deleteUser", deleteUser)
+
 
 module.exports = userRouter

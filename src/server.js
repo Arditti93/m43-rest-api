@@ -20,10 +20,13 @@
 require('./db/connection');
 
 const express = require('express')
+const cors = require('cors')
 const userRouter = require('./users/userRoutes')
 
 //call and define express so we can call server operations
 const app = express()
+
+app.use(cors())
 
 // either set the port from the envrioment varibles OR use 5001
 const port = process.env.PORT || 5001
