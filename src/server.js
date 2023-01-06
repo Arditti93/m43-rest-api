@@ -37,6 +37,12 @@ app.use(express.json())
 //Server has access to our endpoints in our userRoutes file so it can handle requests appropriately
 app.use(userRouter)
 
+//endpoint to check if our REST API server is working once its deployed
+app.get("/health", (req, res) => {
+    res.status(200).send({message: "API is working"})
+})
+
+
 //Server is running on port 5001
 app.listen(port, () => {
     console.log(`Listening on port ${port}`)

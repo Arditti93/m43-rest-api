@@ -25,6 +25,7 @@ exports.createUser = async (req, res) => {
 //GET
 //http://localhost:5001/readUsers
 exports.readUsers = async (req, res) => {
+    console.log("inside readUsers controller")
     try {
         //call .find mongoose method with no parameters so all users will be returned and sent in the response
         const users = await User.find({})

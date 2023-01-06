@@ -16,9 +16,9 @@ userRouter.post("/createUser",hashPass, createUser)
 userRouter.post("/login", comparePass, loginUser)
 
 //removed token check for the moment
-userRouter.get("/readUsers",readUsers) // protected endpoint
+userRouter.get("/readUsers",tokenCheck,readUsers) // protected endpoint
 userRouter.get("/authCheck", tokenCheck, loginUser) // endpoint for persistant login
-userRouter.put("/updateUser", updateUser)
+userRouter.put("/updateUser",hashPass, updateUser)
 userRouter.delete("/deleteUser", deleteUser)
 
 

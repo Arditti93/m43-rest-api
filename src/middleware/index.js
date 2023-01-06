@@ -48,15 +48,14 @@ exports.comparePass = async (req, res, next) => {
 exports.tokenCheck = async (req, res, next) => {
     try {
         //get the token thats passed in the headers 
+        if (!req.header("Authorization")) {
+            console.log("no token passed")
+            throw new Error ("No token passed")
+        }
         const token = req.header("Authorization").replace("Bearer ", "")
-
+        console.log(token)
         //throw an error if no token is passed in the request
-        // if (!token) {
-        //     console.log("no token passed")
-        //     throw new Error ("No token passed")
-        // }
-
-        // decode the token using the jwt verify method. we pass the method two parameters.
+        // decde the token using the jwt verify method. we pass the method two parameters.
         //encoded token that we got on line  51 and the secret password we encoded in the token when we generated it 
         const decodedToken = await jwt.verify(token, process.env.SECRET)
         // console.log(decodedToken)
